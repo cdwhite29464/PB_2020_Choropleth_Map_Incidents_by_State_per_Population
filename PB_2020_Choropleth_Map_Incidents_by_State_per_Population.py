@@ -4,6 +4,7 @@
 # In[1]:
 
 
+from datetime import datetime
 import numpy as np
 import pandas as pd
 pd.set_option('display.max_rows', 500)
@@ -232,7 +233,7 @@ data = dict(type = 'choropleth',
             #hovertemplate = "%{location} <br> Number of Incidents: %{z} <extra>https://github.com/2020PB/police-brutality/blob/master/reports/%{text}.md</extra>",
             hovertemplate = "%{hovertext} <br>Incident Count: %{customdata} <br>Population: %{text}<br>Per Capita Incident Rate: %{z} <extra></extra>",
             marker = dict(line = dict(color = 'rgb(65,65,65)',width = 1)),
-           colorbar = {'title': 'Police Brutality Incident Counts divided by State Population'}
+           colorbar = {'title': 'Police Brutality Incident Counts<br>divided by State Population'}
            )
 #Title Variable
 by_date = pd_consolidated.groupby('date')
@@ -242,8 +243,16 @@ by_date_sum_incidents = by_date.sum()
 first_date = by_date_sum_incidents.index[1]
 last_date = by_date_sum_incidents.index[len(by_date_sum_incidents.index)-1]
 
+#Title Variable
+by_date = pd_consolidated.groupby('date')
+by_date_sum_incidents = by_date.sum()
 
-title_of_layout = "2020 Police Brutality: {} Incidents <br>Data from {} to {}".format(len(pb_data_raw),first_date,last_date)
+# datetime object containing current date and time
+now = datetime.now()
+# dd/mm/YY H:M:S
+dt_string = now.strftime("%m/%d/%Y %H:%M:%S")
+
+title_of_layout = "2020 Police Brutality: {} Incidents <br>Data from {} to {}<br>Date Created: {} MST".format(len(pb_data_raw),first_date,last_date,dt_string)
 
 # Set up Layout for Plotly Map
 layout = dict(title = title_of_layout,
