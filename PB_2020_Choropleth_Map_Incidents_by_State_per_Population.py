@@ -15,7 +15,7 @@ pd.set_option('display.max_rows', 500)
 
 import seaborn as sns
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+#%matplotlib inline
 
 
 # In[3]:
@@ -164,7 +164,7 @@ for state in us_state_abbrev.keys():
         pd_consolidated = pd.concat([blank_state['{}'.format(state)],pd_consolidated])
 
 
-# In[10]:
+# In[9]:
 
 
 by_state = pd_consolidated.groupby('state')
